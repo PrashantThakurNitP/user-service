@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 import reactive.webflux.userservice.dto.TransactionRequestDto;
 import reactive.webflux.userservice.dto.TransactionResponseDto;
 import reactive.webflux.userservice.dto.TransactionStatus;
+import reactive.webflux.userservice.entity.UserTransaction;
 import reactive.webflux.userservice.repository.UserRepository;
 import reactive.webflux.userservice.repository.UserTransactionRepository;
 import reactive.webflux.userservice.util.EntityDtoUtil;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -30,6 +32,11 @@ public class TransactionService {
 			.flatMap(this.transactionRepository::save)
 			.map(ut->EntityDtoUtil.toDto(requestDto,TransactionStatus.APPROVED))
 			.defaultIfEmpty(EntityDtoUtil.toDto(requestDto,TransactionStatus.DECLINED));
+	}
+	
+	public Flux<UserTransaction>getByUserId(int userId){
+		return this.transactionRepository.findByUserId(userId);
+		
 	}
 
 }
