@@ -1,9 +1,15 @@
 package reactive.webflux.userservice.util;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.BeanUtils;
 
+import reactive.webflux.userservice.dto.TransactionRequestDto;
+import reactive.webflux.userservice.dto.TransactionResponseDto;
+import reactive.webflux.userservice.dto.TransactionStatus;
 import reactive.webflux.userservice.dto.UserDto;
 import reactive.webflux.userservice.entity.User;
+import reactive.webflux.userservice.entity.UserTransaction;
 
 public class EntityDtoUtil {
 	
@@ -17,6 +23,22 @@ public class EntityDtoUtil {
 		User user = new User();
 		BeanUtils.copyProperties(dto,user);
 		return user;
+	}
+	
+	public static UserTransaction toEntity(TransactionRequestDto requestDto) {
+		UserTransaction ut = new UserTransaction();
+		ut.setUserId(requestDto.getUserId());
+		
+		ut.setAmount(requestDto.getAmount());
+		ut.setTransactiondate(LocalDateTime.now());
+		return ut;
+	}
+	public static TransactionResponseDto toDto(TransactionRequestDto requestDto, TransactionStatus status) {
+		TransactionResponseDto responseDto = new TransactionResponseDto();
+		responseDto.setAmount(requestDto.getAmount());
+		responseDto.setUserId(requestDto.getUserId());
+		responseDto.setStatus(status);
+		return responseDto;
 	}
 
 }
