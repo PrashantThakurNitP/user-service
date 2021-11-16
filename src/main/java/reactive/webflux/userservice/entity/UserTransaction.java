@@ -15,6 +15,6 @@ public class UserTransaction {
 	private Integer id;
 	private Integer userId;//foreign key
 	private Integer amount;
-	private LocalDateTime transactiondate;
+	private LocalDateTime transactionDate;
 
 }

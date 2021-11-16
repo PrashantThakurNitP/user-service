@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import reactive.webflux.userservice.dto.UserDto;
 import reactive.webflux.userservice.service.UserService;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("user")
@@ -20,6 +21,11 @@ import reactor.core.publisher.Mono;
 public class UserController {
 	@Autowired
 	private UserService service;
+	
+	@GetMapping("all")
+	public Flux<UserDto> all (){
+		return this.service.all();
+	}
 	
 	@GetMapping("{id}")
 	public Mono<ResponseEntity<UserDto>>getUseryId(@PathVariable int id){

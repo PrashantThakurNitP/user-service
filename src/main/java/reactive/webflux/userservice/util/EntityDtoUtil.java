@@ -30,7 +30,7 @@ public class EntityDtoUtil {
 		ut.setUserId(requestDto.getUserId());
 		
 		ut.setAmount(requestDto.getAmount());
-		ut.setTransactiondate(LocalDateTime.now());
+		ut.setTransactionDate(LocalDateTime.now());
 		return ut;
 	}
 	public static TransactionResponseDto toDto(TransactionRequestDto requestDto, TransactionStatus status) {
