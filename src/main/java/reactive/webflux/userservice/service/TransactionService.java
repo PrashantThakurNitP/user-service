@@ -28,9 +28,9 @@ public class TransactionService {
 		//it is wrapper type , we use filter to convert to primitive type
 			.filter(Boolean::booleanValue)
 			//if true below 3 line will be executed else last line will be executed
-			.map(b->EntityDtoUtil.toEntity(requestDto))
+			.map(b->EntityDtoUtil.toEntity(requestDto))//it will be giving user transaction entity
 			.flatMap(this.transactionRepository::save)
-			.map(ut->EntityDtoUtil.toDto(requestDto,TransactionStatus.APPROVED))
+			.map(ut->EntityDtoUtil.toDto(requestDto,TransactionStatus.APPROVED))//getting user transaction updated entity
 			.defaultIfEmpty(EntityDtoUtil.toDto(requestDto,TransactionStatus.DECLINED));
 	}
 	
